@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>MiniProject02 - Team 3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+
+<body class="body">
+<div class="header">
+ <h1>   </h1> <br>
+<br>
+<p th:text="${questionid} + '. ' + ${question.prompt}"></p>
+
+<!--<form th:each="answer,iStat:${question.answers}" action="/answer" method="post"> <br>-->
+<!--   <input type="hidden" name="answerNumber" th:value="${iStat.index}" >-->
+<!--    <input type="submit" th:value="${answer}">-->
+
+    <form  action="/answer" method="post"> <br>
+    Option A: <input type="radio" th:name=${"question.optionA"} th:value="1"/> <br>
+        <br>
+    Option B:  <input type="radio" th:name=${"question.optionB"} th:value="2"/> <br>
+        <br>
+    Option C: <input type="radio" th:name=${"question.optionC"} th:value="3"/><br>
+        <br>
+
+        <input type="submit">
+
+
+    </form>
+</div>
+</body>
+</html>

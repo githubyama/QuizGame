@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <title>MiniProject02 - Team 3</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+
+<body class="body">
+<div class="header">
+  <h1> QUIZZYE </h1>
+</div>
+
+<p> Welcome to The General Knowledge Quiz</p> <br>
+
+<br>
+
+<form  action ="/quiz" method="POST">
+  <p> Please Enter Your Name</p>
+  <input type="text" name="username" /> <br>
+  <p class="text-danger warning" th:if="${warning}" th:text="${warning}"></p>
+  <button type="submit" class="btn btn-warning" > Start Quiz</button>
+
+</form>
+<br>
+
+<!--<a href="/quiz"> Start Quiz</a> <br>-->
+
+<br>
+
+<br> Developed by SAY GAMES. <br>
+
+</body>
+</html>
