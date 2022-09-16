@@ -14,20 +14,16 @@
     <br>
     <br>
     Sorry! You Lost!
-    You have scored: <p th:text="${finalscore} + ' Out of 8.'" >  </p>
+    You have scored: <p th:text="${finalscore} + ' Out of 10.'" >  </p>
     End of the Game
 <br>
-    <table class="body">
-        <tr>
-            <th>Name</th>
-            <th>Score</th>
-        </tr>
-        <tr th:each="score : ${sList}">
-            <td th:text="${score.name}"></td>
-            <td th:text="${score.totalScore}"></td>
-        </tr>
-    </table>
-</div>
+
+    <br>
+
+    <a input type="submit" th:value href="/score"> <br>
+        Top Scores <br>  </a>
+    <br>
+
 <a input type="submit" th:value href="/"> <br>
     Try Again <br>  </a>
 

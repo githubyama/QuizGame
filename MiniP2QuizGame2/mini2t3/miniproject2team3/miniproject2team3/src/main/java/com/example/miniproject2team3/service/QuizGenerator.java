@@ -3,11 +3,11 @@ package com.example.miniproject2team3.service;
 
 import com.example.miniproject2team3.repository.Repository;
 import com.example.miniproject2team3.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -55,14 +55,18 @@ public class QuizGenerator {
 
     public  boolean nextQuestion(){
        currentQuestion++;
-       return currentQuestion >=questionList.size();
+       return currentQuestion >=10;
 
     }
 
     public List<Question> displayQuestions(){
-        return repository.findAll();
+        List<Question> allQuestions = repository.findAll();
+        Collections.shuffle(allQuestions);
+        return allQuestions;
 
     }
+
+
 
     public int scoreIncrease() {
         score++;
@@ -109,8 +113,24 @@ public class QuizGenerator {
        }
     }
 
-    public List<Player> getTopScores() {
-        List<Player> sList = userRepository.findPlayersWithNativeQuery();
-        return sList;
+    public String getTopScore() {
+        List<Player> players = userRepository.findAll();
+        int highScore = 0;
+        String playerWithHighestScore = "";
+        for (Player p : players) {
+            for (Result r: p.results) {
+                if (r.totalScore >highScore) {
+                    highScore = r.totalScore;
+                    playerWithHighestScore = p.getName();
+                }
+            }
+        }
+        return playerWithHighestScore + " " + highScore;
+
     }
+
+    //public List<Result> getTopScore() {
+        //List<Result> sList = userRepository.findTop5Results();
+       // return sList;
+  //  }
 }

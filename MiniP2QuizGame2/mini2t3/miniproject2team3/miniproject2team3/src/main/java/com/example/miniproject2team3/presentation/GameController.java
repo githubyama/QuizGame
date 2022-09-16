@@ -3,6 +3,7 @@ package com.example.miniproject2team3.presentation;
 import com.example.miniproject2team3.service.Player;
 import com.example.miniproject2team3.service.Question;
 import com.example.miniproject2team3.service.QuizGenerator;
+import com.example.miniproject2team3.service.Result;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,9 +64,8 @@ public class GameController {
 
         if (generator.nextQuestion()) {
             generator.saveScore(generator.getScore());
-            List<Player> sList = generator.getTopScores();
-            model.addAttribute("sList", sList);
-            if (generator.getScore() >= 5) {
+
+            if (generator.getScore() >= 7) {
                 model.addAttribute("finalscore", generator.getScore());
                 //   session.invalidate();
                 generator.newGame();
@@ -79,6 +79,14 @@ public class GameController {
             }
         }
         return "result";
+    }
+
+    @GetMapping("/score")
+    public String score(Model m) {
+     String topScore = generator.getTopScore();
+    m.addAttribute("topScore", topScore);
+
+        return "Scoreboard";
     }
 
 }
