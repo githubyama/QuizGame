@@ -3,6 +3,7 @@ package com.example.miniproject2team3.service;
 
 import com.example.miniproject2team3.repository.Repository;
 import com.example.miniproject2team3.repository.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -106,5 +107,10 @@ public class QuizGenerator {
            player = userRepository.save(new Player(username));
 
        }
+    }
+
+    public List<Player> getTopScores() {
+        List<Player> sList = userRepository.findPlayersWithNativeQuery();
+        return sList;
     }
 }

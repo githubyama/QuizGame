@@ -1,7 +1,9 @@
 package com.example.miniproject2team3.presentation;
 
+import com.example.miniproject2team3.service.Player;
 import com.example.miniproject2team3.service.Question;
 import com.example.miniproject2team3.service.QuizGenerator;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 public class GameController {
 
@@ -17,19 +21,18 @@ public class GameController {
     QuizGenerator generator;
 
 
-
     @GetMapping("/")
     public String home() {
         return "index";
     }
 
-    @PostMapping ("/quiz")
-    public String username (Model model, @RequestParam String username, RedirectAttributes ra) {
+    @PostMapping("/quiz")
+    public String username(Model model, @RequestParam String username, RedirectAttributes ra) {
         if (username.equals("")) {
             ra.addFlashAttribute("warning", "Enter a Valid Name!");
             return "redirect:/";
         }
-        generator.logIn (username);
+        generator.logIn(username);
         model.addAttribute("username", username);
         return "redirect:/quiz";
     }
@@ -37,7 +40,7 @@ public class GameController {
     @GetMapping("/quiz")
     public String questions(Model model) {
         Question q = generator.currentQuestion();
-         int id = generator.idIncrease();
+        int id = generator.idIncrease();
         model.addAttribute("question", q);
         model.addAttribute("questionid", id);
         return "gamepage";
@@ -60,18 +63,23 @@ public class GameController {
 
         if (generator.nextQuestion()) {
             generator.saveScore(generator.getScore());
+            List<Player> sList = generator.getTopScores();
+            model.addAttribute("sList", sList);
             if (generator.getScore() >= 5) {
                 model.addAttribute("finalscore", generator.getScore());
-            //   session.invalidate();
+                //   session.invalidate();
                 generator.newGame();
 
                 return "endofgamepass";
             } else {
                 model.addAttribute("finalscore", generator.getScore());
-            //    session.invalidate();
+                //    session.invalidate();
                 generator.newGame();
                 return "endofgamefailed";
             }
-        }  return "result";
+        }
+        return "result";
     }
+
 }
+
