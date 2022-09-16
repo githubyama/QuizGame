@@ -16,6 +16,7 @@ public class Question {
     private String optionA;
     private String optionB;
     private String optionC;
+   // String [] answers;
     @Column(name = "correct_answer", nullable = false)
     private int correctAnswer;
 
@@ -32,6 +33,9 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
+   // public String[] getAnswers() {
+    //    return answers;
+ //   }
     public Long getId() {
         return id;
     }
@@ -74,6 +78,15 @@ public class Question {
 
     public int getCorrectAnswer() {
         return correctAnswer;
+    }
+
+    public String getCorrectAnswerString() {
+        switch (getCorrectAnswer()) {
+            case 1: return optionA;
+            case 2: return optionB;
+            case 3: return optionC;
+            default: throw new IllegalArgumentException();
+        }
     }
 
     public void setCorrectAnswer(int correctAnswer) {

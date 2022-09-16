@@ -2,7 +2,7 @@ package com.example.miniproject2team3.service;
 
 
 import com.example.miniproject2team3.repository.Repository;
-import com.example.miniproject2team3.repository.ResultRepository;
+import com.example.miniproject2team3.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -16,8 +16,10 @@ public class QuizGenerator {
     @Autowired
     Repository repository;
     @Autowired
-    ResultRepository rRepository;
+    UserRepository userRepository;
     List<Question> questionList;
+
+    Player player;
     int score=0;
     int currentQuestion=0;
     int currentQueId =0;
@@ -84,16 +86,25 @@ public class QuizGenerator {
         return currentQueId;
     }
 
-    public void saveScores (Result result) {
-        Result saveResults = new Result();
-        saveResults.setUsername(result.getUsername());
-        saveResults.setTotalScore(result.getTotalScore());
-        rRepository.save(saveResults);
+    public void saveScore (int result) {
+        player.addScore(result);
+        userRepository.save(player);
     }
 
     public void newGame() {
         score=0;
         currentQuestion=0;
         currentQueId =0;
+    }
+
+    public void logIn(String username) {
+       List<Player> playerList = userRepository.findByName(username);
+       if (playerList.size()>0) {
+           player = playerList.get(0);
+       }
+       else {
+           player = userRepository.save(new Player(username));
+
+       }
     }
 }

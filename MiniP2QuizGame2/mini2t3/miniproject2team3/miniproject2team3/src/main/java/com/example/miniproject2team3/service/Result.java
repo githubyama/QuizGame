@@ -12,16 +12,13 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String username;
     int totalScore = 0;
 
 
     public Result() {
     }
 
-    public Result(Long id, String username, int totalScore) {
-        this.id = id;
-        this.username = username;
+    public Result(int totalScore) {
         this.totalScore = totalScore;
     }
 
@@ -31,14 +28,6 @@ public class Result {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public int getTotalScore() {

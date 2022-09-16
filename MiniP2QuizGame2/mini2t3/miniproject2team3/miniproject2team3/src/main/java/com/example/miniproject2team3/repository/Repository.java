@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface Repository extends CrudRepository<Question, Long> {
 
-  //  @Query("SELECT * FROM Question WHERE prompt = ?1")
-  //  List<Question> findQuestionsWithQueryPromot(int age);
     List<Question> findAll();
 
 }

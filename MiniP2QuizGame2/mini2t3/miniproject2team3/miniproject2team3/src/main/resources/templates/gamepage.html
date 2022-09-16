@@ -13,22 +13,36 @@
 <br>
 <p th:text="${questionid} + '. ' + ${question.prompt}"></p>
 
-<!--<form th:each="answer,iStat:${question.answers}" action="/answer" method="post"> <br>-->
-<!--   <input type="hidden" name="answerNumber" th:value="${iStat.index}" >-->
-<!--    <input type="submit" th:value="${answer}">-->
+<form  action="/answer" method="post"> <br>
+  <input type="hidden" name="answerNumber" value="1" >
+    <input type="submit" th:value="${question.optionA}">
+
+</form>
 
     <form  action="/answer" method="post"> <br>
-    Option A: <input type="radio" th:name=${"question.optionA"} th:value="1"/> <br>
-        <br>
-    Option B:  <input type="radio" th:name=${"question.optionB"} th:value="2"/> <br>
-        <br>
-    Option C: <input type="radio" th:name=${"question.optionC"} th:value="3"/><br>
-        <br>
-
-        <input type="submit">
-
+        <input type="hidden" name="answerNumber" value="2" >
+        <input type="submit" th:value="${question.optionB}">
 
     </form>
+
+    <form  action="/answer" method="post"> <br>
+        <input type="hidden" name="answerNumber" value="3" >
+        <input type="submit" th:value="${question.optionC}">
+
+    </form>
+
+<!--    <form  action="/answer" method="post"> <br>-->
+<!--    Option A: <input type="radio" th:name=${"question.optionA"} th:value="1"/> <br>-->
+
+<!--    Option B:  <input type="radio" th:name=${"question.optionB"} th:value="2"/> <br>-->
+        <br>
+<!--    Option C: <input type="radio" th:name=${"question.optionC"} th:value="3"/><br>-->
+<!--        <br>-->
+
+<!--        <input type="submit">-->
+
+
+
 </div>
 </body>
 </html>
