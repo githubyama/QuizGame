@@ -1,9 +1,7 @@
 package com.example.miniproject2team3.service;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 @Entity
 
 public class Question {
@@ -93,11 +91,5 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 }
-
-   /* @Override
-    public String toString() {
-        return  prompt  + "\n" +
-              "  \n Options : " + Arrays.toString(answers) ;
-    }*/
 
 

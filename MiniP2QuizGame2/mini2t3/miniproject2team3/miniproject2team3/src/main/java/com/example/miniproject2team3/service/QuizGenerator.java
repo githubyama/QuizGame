@@ -50,6 +50,7 @@ public class QuizGenerator {
 
     public Question currentQuestion(){
         questionList = repository.findAll();
+      //  Collections.shuffle(questionList);
         return questionList.get(currentQuestion);
     }
 
@@ -77,14 +78,10 @@ public class QuizGenerator {
     public int getScore() {
         return score;
     }
-    // public String checkAnswer(QandARepository questions){
-     //   if(correctAnswer[] == userrinput)
-   // }
 
   public int idIncrease() {
         currentQueId++;
         return currentQueId;
-
     }
 
     public int getCurrentQueId() {
@@ -125,12 +122,8 @@ public class QuizGenerator {
                 }
             }
         }
-        return playerWithHighestScore + " " + highScore;
+        return " Player with the highest score:\n" +  playerWithHighestScore + " "  + highScore;
 
     }
 
-    //public List<Result> getTopScore() {
-        //List<Result> sList = userRepository.findTop5Results();
-       // return sList;
-  //  }
 }
